@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+		<constant name="struts.i18n.encoding" value="UTF-8"/>
+		<!-- Struts 2的Action必须放在指定的包空间下定义 -->
+		<package name="crazyit" extends="struts-default" namespace="">
+			<!-- 定义addBook的Action，该Action的实现类为
+				org.crazyit.struts2qs.action.AddBookAction -->
+			<action name="addBook" class="action.AddBookAction">
+				<!-- 使用chain结果类型，跳转到另外一个Action -->
+				<result type="chain">getBooks</result>
+			</action>
+			<action name="getBooks" class="action.GetBooksAction">
+				<!-- 如果处理结果返回success，进入showBook.jsp页面 -->
+				<result>/WEB-INF/content/showBook.jsp</result> 
+			</action>
+			<action name="*">
+				<result>/WEB-INF/content/{1}.jsp</result> 
+			</action>
+		</package>
+	</struts>
